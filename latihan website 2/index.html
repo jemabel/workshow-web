@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio pribadi Abel Jemima - Web Developer & Designer">
+    <title>Abel Jemima | Portfolio</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Favicon -->
+    <link rel="icon" href="assets/image/favicon.png" type="image/png">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <!-- ===== SIDEBAR NAVIGATION ===== -->
+    <!-- aside digunakan karena ini navigasi samping, bukan site header (banner) -->
+    <aside class="sidebar" id="sidebar" aria-label="Navigasi utama">
+
+        <!-- Nav Menu -->
+        <nav class="sidebar__nav">
+            <ul class="sidebar__menu">
+
+                <li class="sidebar__item nav-item">
+                    <a href="#home" class="sidebar__link active" id="nav-home" aria-label="Home">
+                        <span class="sidebar__icon"><i class="fa-solid fa-house" aria-hidden="true"></i></span>
+                        <span class="sidebar__label">Home</span>
+                    </a>
+                </li>
+
+                <li class="sidebar__item nav-item">
+                    <a href="#about" class="sidebar__link" id="nav-about" aria-label="About">
+                        <span class="sidebar__icon"><i class="fa-solid fa-user" aria-hidden="true"></i></span>
+                        <span class="sidebar__label">About</span>
+                    </a>
+                </li>
+
+                <li class="sidebar__item nav-item">
+                    <a href="#project" class="sidebar__link" id="nav-project" aria-label="Project">
+                        <span class="sidebar__icon"><i class="fa-solid fa-folder-open" aria-hidden="true"></i></span>
+                        <span class="sidebar__label">Project</span>
+                    </a>
+                </li>
+
+                <li class="sidebar__item nav-item">
+                    <a href="#contact" class="sidebar__link" id="nav-contact" aria-label="Contact">
+                        <span class="sidebar__icon"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i></span>
+                        <span class="sidebar__label">Contact</span>
+                    </a>
+                </li>
+
+            </ul>
+        </nav>
+
+    </aside>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main>
+        <!-- ===== SECTION HOME ===== -->
+        <section id="home" class="home">
+
+            <!-- Layer 1: Background Dekorasi Subtle -->
+            <div class="home__bg" aria-hidden="true"></div>
+
+            <!-- Layer 2: Karakter Utama (Bawah Tengah) -->
+            <div class="home__character-wrap" id="characterWrap">
+                <!--
+                    Sprite set — JS akan otomatis switch src sesuai arah kursor:
+                    char-center / char-up / char-down / char-left / char-right
+                    char-up-left / char-up-right / char-down-left / char-down-right
+                -->
+                <img
+                    src="assets/image/char-center.png"
+                    alt="Abel Jemima"
+                    class="home__character"
+                    id="charSprite"
+                    draggable="false"
+                />
+            </div>
+
+            <!-- Layer 3: Nama Portfolio (Pill Claymorphism Timbul) -->
+            <div class="home__name-badge">
+                <h1 class="home__name-title">Abel Jemima</h1>
+            </div>
+
+        </section>
+
+        <!-- ===== SECTION ABOUT ===== -->
+        <section id="about" class="about">
+            <div class="about__container">
+
+                <!-- Sisi Kiri: Informasi About -->
+                <div class="about__content">
+                    <h2 class="about__heading">Hi, I'm Abel Jemima</h2>
+                    <p class="about__intro">
+                        A passionate creative focusing on modern web design, claymorphism, and dynamic interactive experiences.
+                    </p>
+
+                    <!-- Experience -->
+                    <div class="about__block">
+                        <h3 class="about__section-title">EXPERIENCE</h3>
+                        <div class="about__list">
+                            <div class="about__item">Dosen IT</div>
+                            <div class="about__item">Lead Developer</div>
+                            <div class="about__item">Senior Web Developer</div>
+                        </div>
+                    </div>
+
+                    <!-- Education -->
+                    <div class="about__block">
+                        <h3 class="about__section-title">EDUCATION</h3>
+                        <div class="about__list">
+                            <div class="about__item">S1 - Universitas Pelita Harapan</div>
+                            <div class="about__item">S2 - Universitas Indonesia</div>
+                            <div class="about__item">S3 - Asia Pacific University</div>
+                        </div>
+                    </div>
+
+                    <!-- Contact -->
+                    <div class="about__block">
+                        <h3 class="about__section-title">CONTACT</h3>
+                        <div class="about__contact-icons">
+                            <!-- href="#" diganti ke aria-disabled agar tidak scroll ke atas saat diklik -->
+                            <a href="https://www.behance.net/" class="icon-box" aria-label="Profil Behance" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-behance" aria-hidden="true"></i></a>
+                            <a href="https://www.linkedin.com/" class="icon-box" aria-label="Profil LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
+                            <a href="mailto:contact@example.com" class="icon-box" aria-label="Kirim Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>
+                            <a href="https://abeljemima.com" class="icon-box" aria-label="Portfolio Website" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-pen-nib" aria-hidden="true"></i></a>
+                        </div>
+                        <div class="about__divider"></div>
+                    </div>
+
+                    <!-- Tools -->
+                    <div class="about__block">
+                        <h3 class="about__section-title">TOOLS</h3>
+                        <div class="about__tools-icons">
+                            <span class="icon-box" aria-label="Figma"><i class="fa-brands fa-figma" aria-hidden="true"></i></span>
+                            <span class="icon-box" aria-label="Visual Studio Code"><i class="fa-solid fa-code" aria-hidden="true"></i></span>
+                            <span class="icon-box" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></span>
+                            <span class="icon-box" aria-label="Adobe XD"><i class="fa-brands fa-adobe" aria-hidden="true"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sisi Kanan: Gambar Lanyard -->
+                <div class="about__lanyard-side">
+                    <img
+                        src="assets/image/lanyard.png"
+                        alt="Abel Jemima ID Card Lanyard"
+                        class="about__lanyard-img"
+                        draggable="false"
+                    />
+                </div>
+
+            </div>
+        </section>
+        <!-- ===== SECTION PROJECTS ===== -->
+        <section id="project" class="projects">
+            <div class="projects__container">
+
+                <!-- Header Title with Editorial Divider Lines -->
+                <div class="projects__header">
+                    <span class="projects__header-line" aria-hidden="true"></span>
+                    <h2 class="projects__title">PROJECTS</h2>
+                    <span class="projects__header-line" aria-hidden="true"></span>
+                </div>
+
+                <!-- Slider Wrapper with Nav Buttons -->
+                <div class="projects__slider-wrapper">
+                    <button class="projects__nav-btn projects__nav-btn--prev" id="projectPrevBtn" aria-label="Previous Projects">
+                        <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+                    </button>
+
+                    <!-- Scroll Track dengan CSS Scroll-Snap -->
+                    <!-- Diubah ke ul/li untuk semantik yang lebih tepat (list of projects) -->
+                    <ul class="projects__track" id="projectTrack" role="list">
+
+                        <!-- Card 01 -->
+                        <li class="projects__card">
+                            <span class="projects__card-number" aria-hidden="true">01</span>
+                            <div class="projects__card-preview" role="button" tabindex="0" aria-label="Lihat detail Project 1">
+                                <i class="fa-solid fa-mobile-screen projects__card-icon" aria-hidden="true"></i>
+                            </div>
+                            <div class="projects__card-info">
+                                <h3 class="projects__card-title">Project 1</h3>
+                                <p class="projects__card-category">Mobile Application</p>
+                            </div>
+                        </li>
+
+                        <!-- Card 02 -->
+                        <li class="projects__card">
+                            <span class="projects__card-number" aria-hidden="true">02</span>
+                            <div class="projects__card-preview" role="button" tabindex="0" aria-label="Lihat detail Project 2">
+                                <i class="fa-solid fa-tablet-screen-button projects__card-icon" aria-hidden="true"></i>
+                            </div>
+                            <div class="projects__card-info">
+                                <h3 class="projects__card-title">Project 2</h3>
+                                <p class="projects__card-category">Tablet Dashboard</p>
+                            </div>
+                        </li>
+
+                        <!-- Card 03 -->
+                        <li class="projects__card">
+                            <span class="projects__card-number" aria-hidden="true">03</span>
+                            <div class="projects__card-preview" role="button" tabindex="0" aria-label="Lihat detail Project 3">
+                                <i class="fa-solid fa-laptop projects__card-icon" aria-hidden="true"></i>
+                            </div>
+                            <div class="projects__card-info">
+                                <h3 class="projects__card-title">Project 3</h3>
+                                <p class="projects__card-category">Web Platform</p>
+                            </div>
+                        </li>
+
+                        <!-- Card 04 -->
+                        <li class="projects__card">
+                            <span class="projects__card-number" aria-hidden="true">04</span>
+                            <div class="projects__card-preview" role="button" tabindex="0" aria-label="Lihat detail Project 4">
+                                <i class="fa-solid fa-desktop projects__card-icon" aria-hidden="true"></i>
+                            </div>
+                            <div class="projects__card-info">
+                                <h3 class="projects__card-title">Project 4</h3>
+                                <p class="projects__card-category">Desktop Software</p>
+                            </div>
+                        </li>
+
+                        <!-- Card 05 -->
+                        <li class="projects__card">
+                            <span class="projects__card-number" aria-hidden="true">05</span>
+                            <div class="projects__card-preview" role="button" tabindex="0" aria-label="Lihat detail Project 5">
+                                <i class="fa-solid fa-layer-group projects__card-icon" aria-hidden="true"></i>
+                            </div>
+                            <div class="projects__card-info">
+                                <h3 class="projects__card-title">Project 5</h3>
+                                <p class="projects__card-category">Design System & UI Kit</p>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                    <button class="projects__nav-btn projects__nav-btn--next" id="projectNextBtn" aria-label="Next Projects">
+                        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ===== SECTION CONTACT ===== -->
+        <section id="contact" class="contact">
+            <div class="contact__container">
+
+                <!-- Header Title with Editorial Divider Lines -->
+                <div class="contact__header">
+                    <span class="contact__header-line" aria-hidden="true"></span>
+                    <h2 class="contact__title">CONTACT</h2>
+                    <span class="contact__header-line" aria-hidden="true"></span>
+                </div>
+
+                <!-- Envelope Interactive CTA Scene -->
+                <div class="contact__envelope-scene">
+                    <!-- role="button" lebih tepat karena envelope adalah elemen interaktif clickable -->
+                    <div class="envelope" id="contactEnvelope" tabindex="0" role="button" aria-label="Amplop interaktif — tekan Enter atau klik untuk membuka surat kontak">
+
+                        <!-- 1. Bagian Belakang Amplop -->
+                        <div class="envelope__back" aria-hidden="true">
+                            <div class="envelope__flap-top"></div>
+                        </div>
+
+                        <!-- 2. Surat di Dalam Amplop -->
+                        <div class="envelope__letter" id="envelopeLetter">
+                            <div class="envelope__letter-card">
+                                
+                                <!-- Letter Top Postal Marks -->
+                                <div class="envelope__letter-header">
+                                    <span class="envelope__letter-badge">AIR MAIL</span>
+                                    <div class="envelope__letter-stamp" aria-hidden="true">
+                                        <i class="fa-solid fa-stamp"></i>
+                                    </div>
+                                </div>
+
+                                <!-- Letter Content -->
+                                <div class="envelope__letter-body">
+                                    <h3 class="envelope__letter-title">Let's Work Together!</h3>
+                                    <p class="envelope__letter-text">
+                                        Have a project in mind, need a developer, or just want to discuss some cool ideas? I'm always open to new opportunities.
+                                    </p>
+                                </div>
+
+                                <!-- Letter Action Button -->
+                                <div class="envelope__letter-action">
+                                    <a href="mailto:contact@abeljemima.com" class="envelope__letter-btn" id="contactEmailBtn" aria-label="Send Me an Email via mailto">
+                                        <span>Send Me an Email</span>
+                                        <i class="fa-solid fa-paper-plane"></i>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- 3. Pocket / Bagian Depan Amplop -->
+                        <div class="envelope__pocket" aria-hidden="true">
+                            <div class="envelope__pocket-left"></div>
+                            <div class="envelope__pocket-right"></div>
+                            <div class="envelope__pocket-bottom"></div>
+                            <div class="envelope__seal">
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Subtle Interactive Cue — aria-hidden dihapus agar screenreader bisa membaca instruksi interaksi -->
+                    <p class="contact__hint">
+                        <i class="fa-solid fa-envelope-open" aria-hidden="true"></i> Arahkan kursor atau sentuh amplop untuk membuka surat
+                    </p>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== PROJECT MODAL POPUP ===== -->
+    <div class="project-modal" id="projectModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="project-modal__overlay" id="modalOverlay"></div>
+        <div class="project-modal__content">
+            <button class="project-modal__close" id="modalCloseBtn" aria-label="Tutup modal">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="project-modal__body">
+                <div class="project-modal__preview">
+                    <div class="project-modal__preview-inner" id="modalPreviewInner">
+                        <i class="fa-solid fa-mobile-screen project-modal__icon" id="modalIcon"></i>
+                    </div>
+                </div>
+                <div class="project-modal__info">
+                    <span class="project-modal__number" id="modalNumber">01</span>
+                    <!-- h2 lebih tepat karena modal adalah dialog setara halaman, tidak ada h2 di atasnya -->
+                    <h2 class="project-modal__title" id="modalTitle">Project 1</h2>
+                    <p class="project-modal__category" id="modalCategory">Mobile Application</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== FLOATING WHATSAPP BUTTON ===== -->
+    <a
+        href="https://wa.me/6281234567890"
+        class="floating-wa"
+        id="floatingWaBtn"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat via WhatsApp"
+        title="Chat via WhatsApp"
+    >
+        <i class="fa-brands fa-whatsapp floating-wa__icon"></i>
+    </a>
+
+    <!-- JS -->
+    <script src="assets/js/script.js"></script>
+
+</body>
+
+</html>

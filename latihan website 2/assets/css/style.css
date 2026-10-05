@@ -1,0 +1,1797 @@
+/* =========================================
+   RESET & BASE STYLES
+   ========================================= */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --color-bg:           #ffffff;
+    --color-sidebar:      #c9ded9;
+    --color-active:       #f5f1e7;
+    --color-text:         #35564e;
+    --color-text-muted:   #557970;
+    --color-white:        #ffffff;
+    --font-main:          'Plus Jakarta Sans', sans-serif;
+    --sidebar-width:      170px;
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    min-height: 100vh;
+    /* overflow-x dan width dihapus dari body — sudah di-handle di html */
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* =========================================
+   SIDEBAR NAVIGATION (FLOATING CAPSULE)
+   ========================================= */
+.sidebar {
+    position: fixed;
+    top: 24px;
+    left: 24px;
+    bottom: 24px;
+    width: var(--sidebar-width);
+    border-radius: 32px;
+    padding: 32px 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    z-index: 100;
+    background: var(--color-sidebar);
+    background-image: radial-gradient(ellipse at 35% 20%, rgba(255, 255, 255, 0.5) 0%, transparent 65%);
+    box-shadow:
+        8px 12px 28px rgba(145, 190, 180, 0.4),
+        inset 2px 2px 6px rgba(255, 255, 255, 0.7),
+        inset -2px -2px 6px rgba(135, 180, 170, 0.3);
+}
+
+.sidebar__nav {
+    width: 100%;
+}
+
+.sidebar__menu {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+}
+
+.sidebar__item {
+    width: 100%;
+}
+
+.sidebar__link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    border-radius: 50px;
+    text-decoration: none;
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    user-select: none;
+}
+
+.sidebar__icon {
+    width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.sidebar__label {
+    letter-spacing: 0.2px;
+}
+
+/* Hover State */
+.sidebar__link:hover {
+    color: var(--color-text);
+    background: rgba(255, 255, 255, 0.35);
+    transform: translateY(-1px);
+}
+
+/* Active State (Tombol Clay Cream) */
+.sidebar__link.active {
+    background: var(--color-active);
+    color: var(--color-text);
+    font-weight: 700;
+    box-shadow:
+        4px 6px 14px rgba(135, 170, 160, 0.35),
+        -2px -2px 8px rgba(255, 255, 255, 0.95),
+        inset 1px 1px 3px rgba(255, 255, 255, 0.95),
+        inset -1px -1px 3px rgba(210, 195, 170, 0.3);
+    transform: translateY(-1px);
+}
+
+.sidebar__link.active:hover {
+    box-shadow:
+        5px 8px 16px rgba(135, 170, 160, 0.4),
+        -3px -3px 10px rgba(255, 255, 255, 1),
+        inset 1px 1px 3px rgba(255, 255, 255, 0.95),
+        inset -1px -1px 3px rgba(210, 195, 170, 0.3);
+}
+
+/* Focus State (Keyboard Navigation) */
+.sidebar__link:focus-visible {
+    outline: 2px solid var(--color-text);
+    outline-offset: 2px;
+}
+
+/* =========================================
+   MAIN CONTENT
+   ========================================= */
+main {
+    margin-left: calc(var(--sidebar-width) + 24px);
+    min-height: 100vh;
+    /* Hapus rule 'main section { min-height: 100vh }' yang redundant —
+       tiap section sudah punya min-height di class-nya masing-masing */
+}
+
+/* =========================================
+   SECTION HOME (TUTORIAL LAYOUT)
+   ========================================= */
+.home {
+    position: relative;
+    /* Pakai min-height saja — height: 100vh dihapus karena redundant dengan min-height: 100vh */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    overflow: hidden;
+    background-color: var(--color-bg);
+}
+
+/* Layer 1: Background Subtle */
+.home__bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Layer 2: Karakter Utama (Bawah Tengah) */
+.home__character-wrap {
+    position: relative;
+    z-index: 2;
+    height: 90vh;
+    max-height: 880px;
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.home__character {
+    height: 100%;
+    width: auto;
+    max-width: 90vw;
+    object-fit: contain;
+    object-position: bottom center;
+    display: block;
+    user-select: none;
+    pointer-events: none;
+    filter: drop-shadow(0 15px 35px rgba(50, 85, 75, 0.08));
+    transition: opacity 0.05s ease;
+}
+
+/* Layer 3: Nama Portfolio Badge (Claymorphism Pill Melayang) */
+.home__name-badge {
+    position: absolute;
+    bottom: 8vh;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    background: #c3ddd7;
+    background-image: radial-gradient(ellipse at 35% 25%, rgba(255, 255, 255, 0.65) 0%, transparent 65%);
+    padding: 16px 52px;
+    border-radius: 60px;
+    box-shadow:
+        8px 12px 28px rgba(120, 165, 155, 0.42),
+        -5px -5px 14px rgba(255, 255, 255, 0.95),
+        inset 2px 2px 6px rgba(255, 255, 255, 0.75),
+        inset -2px -2px 6px rgba(130, 175, 165, 0.35);
+    animation: floatTitle 4.5s ease-in-out infinite;
+    cursor: default;
+    user-select: none;
+}
+
+.home__name-title {
+    font-family: var(--font-main);
+    font-size: clamp(1.8rem, 3.2vw, 2.75rem);
+    font-weight: 700;
+    color: var(--color-text);
+    letter-spacing: 0.6px;
+    margin: 0;
+    line-height: 1.1;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* Subtle Floating Animation */
+@keyframes floatTitle {
+    0%, 100% {
+        transform: translate(-50%, 0);
+    }
+    50% {
+        transform: translate(-50%, -9px);
+    }
+}
+
+/* =========================================
+   SECTION ABOUT (EDITORIAL RESUME LAYOUT)
+   ========================================= */
+.about {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 100px 80px 100px 70px;
+    background-color: var(--color-bg);
+    overflow: hidden;
+}
+
+.about__container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 60px;
+    position: relative;
+}
+
+/* Sisi Kiri: Teks & Resume Info */
+.about__content {
+    flex: 1;
+    max-width: 620px;
+}
+
+.about__heading {
+    font-size: clamp(2rem, 3.2vw, 2.75rem);
+    font-weight: 700;
+    color: var(--color-text);
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+    margin-bottom: 14px;
+    min-height: 1.2em; /* Mencegah layout shift sebelum & saat teks diketik */
+}
+
+/* Blinking Cursor */
+.about__cursor {
+    display: inline-block;
+    color: var(--color-text);
+    font-weight: 400;
+    margin-left: 2px;
+    animation: blinkCursor 0.8s step-start infinite;
+}
+
+@keyframes blinkCursor {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+}
+
+.about__intro {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin-bottom: 34px;
+    max-width: 540px;
+}
+
+/* Blocks: Experience, Education, etc */
+.about__block {
+    margin-bottom: 24px;
+}
+
+.about__section-title {
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--color-text);
+    margin-bottom: 10px;
+}
+
+/* Divider Lines */
+.about__list {
+    border-top: 1px solid rgba(85, 121, 112, 0.28);
+}
+
+.about__item {
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--color-text);
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(85, 121, 112, 0.28);
+    letter-spacing: 0.2px;
+}
+
+.about__divider {
+    height: 1px;
+    background-color: rgba(85, 121, 112, 0.28);
+    margin-top: 14px;
+}
+
+/* Contact & Tools Icon Boxes */
+.about__contact-icons {
+    display: grid;
+    grid-template-columns: repeat(2, 34px);
+    gap: 8px;
+    margin: 10px 0 14px;
+}
+
+.about__tools-icons {
+    display: flex;
+    gap: 8px;
+    margin: 10px 0;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(85, 121, 112, 0.28);
+}
+
+.icon-box {
+    width: 34px;
+    height: 34px;
+    background: #81a59c;
+    color: var(--color-white);
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    box-shadow: 2px 2px 6px rgba(129, 165, 156, 0.35);
+}
+
+.icon-box:hover {
+    background: var(--color-text);
+    transform: translateY(-2px);
+    box-shadow: 3px 4px 10px rgba(53, 86, 78, 0.3);
+}
+
+.icon-box:focus-visible {
+    outline: 2px solid var(--color-text);
+    outline-offset: 2px;
+}
+
+/* Sisi Kanan: Gambar Lanyard Menggantung */
+.about__lanyard-side {
+    flex-shrink: 0;
+    width: clamp(280px, 32vw, 420px);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: -60px;
+    position: relative;
+}
+
+.about__lanyard-img {
+    width: 100%;
+    height: auto;
+    max-height: 750px;
+    object-fit: contain;
+    filter: drop-shadow(0 18px 30px rgba(53, 86, 78, 0.12));
+    user-select: none;
+    -webkit-user-drag: none;
+    pointer-events: auto;
+    cursor: grab;
+    touch-action: none;
+    transform-origin: top center;
+    will-change: transform;
+}
+
+.about__lanyard-img.is-dragging {
+    cursor: grabbing;
+}
+
+body.is-lanyard-dragging {
+    cursor: grabbing !important;
+    user-select: none !important;
+}
+
+/* =========================================
+   SECTION PROJECTS (HORIZONTAL CLAY SLIDER)
+   ========================================= */
+.projects {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 90px 48px;
+    background-color: var(--color-bg);
+    overflow: hidden;
+}
+
+.projects__container {
+    width: 100%;
+    max-width: 1140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+}
+
+/* Header with thin divider lines */
+.projects__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    width: 100%;
+    max-width: 650px;
+}
+
+.projects__header-line {
+    flex: 1;
+    height: 1px;
+    background-color: rgba(53, 86, 78, 0.4);
+}
+
+.projects__title {
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: var(--color-text);
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+/* Slider Wrapper */
+.projects__slider-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Nav Buttons */
+.projects__nav-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: #eef5f3;
+    color: var(--color-text);
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    z-index: 10;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow:
+        4px 6px 12px rgba(140, 180, 170, 0.35),
+        -3px -3px 8px #ffffff,
+        inset 1px 1px 3px #ffffff,
+        inset -1px -1px 3px rgba(160, 195, 185, 0.25);
+}
+
+.projects__nav-btn:hover {
+    background: var(--color-active);
+    transform: scale(1.12);
+    box-shadow:
+        6px 8px 16px rgba(140, 180, 170, 0.45),
+        -4px -4px 10px #ffffff,
+        inset 1px 1px 3px #ffffff,
+        inset -1px -1px 3px rgba(210, 195, 170, 0.3);
+}
+
+.projects__nav-btn:active {
+    transform: scale(0.95);
+}
+
+/* Track with CSS scroll-snap
+   Diubah ke <ul> — reset list-style bawaan browser */
+.projects__track {
+    list-style: none;
+    display: flex;
+    gap: 28px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 24px 12px;
+    width: 100%;
+}
+
+.projects__track::-webkit-scrollbar {
+    display: none;
+}
+
+/* Cards (Desktop: ~3 cards) */
+.projects__card {
+    flex: 0 0 calc((100% - 56px) / 3);
+    background: #e3ede8;
+    background-image: radial-gradient(ellipse at 25% 20%, rgba(255, 255, 255, 0.55) 0%, transparent 70%);
+    border-radius: 26px;
+    padding: 24px 22px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    scroll-snap-align: start;
+    box-shadow:
+        8px 12px 24px rgba(145, 185, 175, 0.38),
+        -6px -6px 16px #ffffff,
+        inset 2px 2px 5px rgba(255, 255, 255, 0.65),
+        inset -2px -2px 5px rgba(130, 170, 160, 0.22);
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
+    cursor: pointer;
+    user-select: none;
+}
+
+.projects__card:hover {
+    transform: translateY(-8px);
+    box-shadow:
+        12px 18px 32px rgba(135, 180, 170, 0.45),
+        -8px -8px 20px #ffffff,
+        inset 2px 2px 5px rgba(255, 255, 255, 0.8),
+        inset -2px -2px 5px rgba(130, 170, 160, 0.2);
+}
+
+.projects__card-number {
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: #7b9c93;
+    letter-spacing: 0.5px;
+    line-height: 1;
+}
+
+/* Inner Screen Mockup (Recessed Clay Cut-out) */
+.projects__card-preview {
+    width: 100%;
+    height: 175px;
+    background: #edf5f2;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow:
+        inset 3px 3px 8px rgba(130, 170, 160, 0.3),
+        inset -3px -3px 8px rgba(255, 255, 255, 0.95);
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.projects__card-preview:hover {
+    transform: scale(1.02);
+    box-shadow:
+        inset 4px 4px 10px rgba(130, 170, 160, 0.38),
+        inset -4px -4px 10px rgba(255, 255, 255, 1);
+}
+
+.projects__card-preview:focus-visible {
+    outline: 2px solid var(--color-active);
+    outline-offset: 2px;
+}
+
+.projects__card-icon {
+    font-size: 2.8rem;
+    color: #35564e;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.projects__card:hover .projects__card-icon,
+.projects__card-preview:hover .projects__card-icon {
+    transform: scale(1.12);
+}
+
+.projects__card-info {
+    text-align: center;
+    margin-top: 4px;
+}
+
+.projects__card-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 2px;
+}
+
+.projects__card-category {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+}
+
+/* =========================================
+   PROJECT MODAL POPUP
+   ========================================= */
+body.modal-open {
+    overflow: hidden;
+}
+
+.project-modal {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-modal.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* Overlay Hitam Transparan + Backdrop Blur Ringan */
+.project-modal__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(14, 26, 22, 0.72);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+/* Modal Content with Claymorphism & Fade+Scale Animation */
+.project-modal__content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 580px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: #e3ede8;
+    background-image: radial-gradient(ellipse at 30% 20%, rgba(255, 255, 255, 0.75) 0%, transparent 70%);
+    border-radius: 28px;
+    padding: 32px 28px;
+    box-shadow:
+        18px 26px 50px rgba(0, 0, 0, 0.35),
+        -6px -6px 20px rgba(255, 255, 255, 0.85),
+        inset 2px 2px 6px rgba(255, 255, 255, 0.75),
+        inset -2px -2px 6px rgba(130, 170, 160, 0.3);
+    transform: scale(0.85);
+    opacity: 0;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+}
+
+.project-modal.is-open .project-modal__content {
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* Tombol Close X di Kanan Atas */
+.project-modal__close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: #eef5f3;
+    color: var(--color-text);
+    font-size: 1.15rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow:
+        4px 4px 10px rgba(140, 180, 170, 0.35),
+        -2px -2px 6px #ffffff,
+        inset 1px 1px 2px #ffffff,
+        inset -1px -1px 2px rgba(160, 195, 185, 0.25);
+    z-index: 10;
+}
+
+.project-modal__close:hover {
+    background: var(--color-active);
+    color: var(--color-text);
+    transform: scale(1.1) rotate(90deg);
+    box-shadow:
+        5px 7px 14px rgba(140, 180, 170, 0.45),
+        -3px -3px 8px #ffffff;
+}
+
+.project-modal__close:focus-visible {
+    outline: 2px solid var(--color-active);
+    outline-offset: 2px;
+}
+
+.project-modal__close:active {
+    transform: scale(0.95);
+}
+
+/* Modal Body */
+.project-modal__body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Area Gambar / Preview yang Lebih Besar */
+.project-modal__preview {
+    width: 100%;
+}
+
+.project-modal__preview-inner {
+    width: 100%;
+    height: clamp(220px, 36vh, 320px);
+    background: #edf5f2;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow:
+        inset 4px 4px 12px rgba(130, 170, 160, 0.35),
+        inset -4px -4px 12px rgba(255, 255, 255, 0.95);
+    overflow: hidden;
+    padding: 16px;
+}
+
+.project-modal__icon {
+    font-size: clamp(4.5rem, 9vw, 6.5rem);
+    color: #35564e;
+    filter: drop-shadow(0 10px 20px rgba(53, 86, 78, 0.16));
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.project-modal__image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 14px;
+    filter: drop-shadow(0 10px 20px rgba(53, 86, 78, 0.16));
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.project-modal__content:hover .project-modal__icon,
+.project-modal__content:hover .project-modal__image {
+    transform: scale(1.05);
+}
+
+/* Modal Info */
+.project-modal__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 4px;
+}
+
+.project-modal__number {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #7b9c93;
+    letter-spacing: 1px;
+}
+
+.project-modal__title {
+    font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+    font-weight: 800;
+    color: var(--color-text);
+    letter-spacing: 0.2px;
+}
+
+.project-modal__category {
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+}
+
+/* =========================================
+   SECTION CONTACT (CLAYMORPHISM ENVELOPE CTA)
+   ========================================= */
+.contact {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 48px 120px;
+    background-color: var(--color-bg);
+    overflow: hidden;
+}
+
+.contact__container {
+    width: 100%;
+    max-width: 1140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.contact__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    width: 100%;
+    max-width: 650px;
+}
+
+.contact__header-line {
+    flex: 1;
+    height: 1px;
+    background-color: rgba(53, 86, 78, 0.4);
+}
+
+.contact__title {
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: var(--color-text);
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+/* Envelope Scene: Provides headroom for the letter to rise upwards */
+.contact__envelope-scene {
+    position: relative;
+    width: 100%;
+    max-width: 540px;
+    margin-top: 130px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Master Envelope Container */
+.envelope {
+    position: relative;
+    width: 100%;
+    height: 280px;
+    cursor: pointer;
+    user-select: none;
+    outline: none;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.envelope:hover,
+.envelope:focus-visible,
+.envelope.is-open {
+    transform: translateY(-4px);
+}
+
+/* 1. Bagian Belakang Amplop */
+.envelope__back {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 250px;
+    background: #b6d1c8;
+    background-image: radial-gradient(ellipse at 40% 30%, rgba(255, 255, 255, 0.45) 0%, transparent 70%);
+    border-radius: 26px;
+    z-index: 1;
+    box-shadow:
+        10px 18px 36px rgba(135, 180, 170, 0.42),
+        -6px -6px 18px #ffffff,
+        inset 2px 2px 6px rgba(255, 255, 255, 0.65),
+        inset -2px -2px 6px rgba(120, 165, 155, 0.28);
+}
+
+/* Flap Atas Amplop (Terbuka di Belakang Surat) */
+.envelope__flap-top {
+    position: absolute;
+    top: -95px;
+    left: 0;
+    right: 0;
+    height: 105px;
+    background: #a9c6bd;
+    background-image: linear-gradient(to top, #b6d1c8 0%, #9dbcb2 100%);
+    clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+    transform-origin: bottom center;
+    transition: transform 0.6s cubic-bezier(0.34, 1.35, 0.64, 1);
+    z-index: 1;
+}
+
+.envelope:hover .envelope__flap-top,
+.envelope:focus-visible .envelope__flap-top,
+.envelope.is-open .envelope__flap-top {
+    transform: rotateX(12deg) scale(1.02);
+}
+
+/* 2. Surat di Dalam Amplop */
+.envelope__letter {
+    position: absolute;
+    bottom: 16px;
+    left: 4%;
+    width: 92%;
+    z-index: 3;
+    transform: translateY(35px);
+    transition: transform 0.65s cubic-bezier(0.34, 1.35, 0.64, 1), box-shadow 0.65s ease;
+    pointer-events: auto;
+}
+
+/* Kondisi Saat Hover / Focus / Open: Surat Naik Perlahan dengan Animasi Playful */
+.envelope:hover .envelope__letter,
+.envelope:focus-within .envelope__letter,
+.envelope.is-open .envelope__letter {
+    transform: translateY(-165px);
+    z-index: 6;
+}
+
+.envelope__letter-card {
+    background: #ffffff;
+    background-image: radial-gradient(ellipse at 25% 15%, rgba(255, 255, 255, 1) 0%, #f6faf8 100%);
+    border-radius: 22px;
+    padding: 24px 24px 22px;
+    border: 1px solid rgba(190, 222, 214, 0.6);
+    box-shadow:
+        0 14px 34px rgba(53, 86, 78, 0.16),
+        inset 2px 2px 5px #ffffff,
+        inset -2px -2px 5px rgba(180, 210, 200, 0.25);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: left;
+}
+
+.envelope:hover .envelope__letter-card,
+.envelope:focus-within .envelope__letter-card,
+.envelope.is-open .envelope__letter-card {
+    box-shadow:
+        0 22px 48px rgba(53, 86, 78, 0.24),
+        inset 2px 2px 6px #ffffff,
+        inset -2px -2px 6px rgba(180, 210, 200, 0.3);
+}
+
+/* Header Surat (Stamp & Badge) */
+.envelope__letter-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.envelope__letter-badge {
+    font-size: 0.68rem;
+    font-weight: 800;
+    color: #557970;
+    background: #edf5f2;
+    padding: 4px 10px;
+    border-radius: 6px;
+    letter-spacing: 1.5px;
+    box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.8), inset -1px -1px 2px rgba(140, 180, 170, 0.2);
+}
+
+.envelope__letter-stamp {
+    width: 32px;
+    height: 34px;
+    border: 2px dashed rgba(85, 121, 112, 0.45);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    color: #557970;
+    background: #fafcfb;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.envelope:hover .envelope__letter-stamp,
+.envelope:focus-within .envelope__letter-stamp,
+.envelope.is-open .envelope__letter-stamp {
+    transform: rotate(6deg) scale(1.08);
+}
+
+/* Judul & Paragraf Surat */
+.envelope__letter-title {
+    font-size: clamp(1.25rem, 2.5vw, 1.55rem);
+    font-weight: 800;
+    color: var(--color-text);
+    margin: 0;
+    line-height: 1.25;
+}
+
+.envelope__letter-text {
+    font-size: clamp(0.82rem, 1.5vw, 0.9rem);
+    color: var(--color-text-muted);
+    line-height: 1.55;
+    margin: 0;
+}
+
+/* Action Button */
+.envelope__letter-action {
+    margin-top: 4px;
+}
+
+.envelope__letter-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #35564e;
+    color: #ffffff;
+    padding: 11px 24px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    position: relative;
+    z-index: 20;
+    pointer-events: auto;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow:
+        4px 6px 14px rgba(53, 86, 78, 0.32),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.35);
+}
+
+.envelope__letter-btn:hover {
+    background: #25423b;
+    transform: translateY(-2px) scale(1.03);
+    box-shadow:
+        6px 10px 20px rgba(53, 86, 78, 0.42),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.45);
+}
+
+.envelope__letter-btn:active {
+    transform: scale(0.97);
+}
+
+/* 3. Pocket / Bagian Depan Amplop */
+.envelope__pocket {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 250px;
+    border-radius: 26px;
+    z-index: 5;
+    pointer-events: none;
+    overflow: hidden;
+    filter: drop-shadow(0 -5px 12px rgba(53, 86, 78, 0.12));
+}
+
+.envelope__pocket-left {
+    position: absolute;
+    inset: 0;
+    clip-path: polygon(0 0, 52% 52%, 0 100%);
+    background: #bed6cf;
+}
+
+.envelope__pocket-right {
+    position: absolute;
+    inset: 0;
+    clip-path: polygon(100% 0, 48% 52%, 100% 100%);
+    background: #b3cec6;
+}
+
+.envelope__pocket-bottom {
+    position: absolute;
+    inset: 0;
+    clip-path: polygon(0 100%, 50% 44%, 100% 100%);
+    background: linear-gradient(to top, #c7ded7 0%, #b8d4cd 100%);
+    box-shadow: inset 1px 1px 3px rgba(255, 255, 255, 0.65);
+}
+
+.envelope__seal {
+    position: absolute;
+    top: 44%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #eef5f3;
+    color: #35564e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    box-shadow:
+        4px 6px 14px rgba(135, 180, 170, 0.4),
+        inset 2px 2px 4px #ffffff,
+        inset -2px -2px 4px rgba(130, 170, 160, 0.3);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 2;
+}
+
+.envelope:hover .envelope__seal,
+.envelope:focus-visible .envelope__seal,
+.envelope.is-open .envelope__seal {
+    transform: translate(-50%, -50%) scale(1.12) rotate(12deg);
+}
+
+/* Subtle Interactive Hint */
+.contact__hint {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    margin-top: 26px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+    opacity: 0.9;
+}
+
+/* =========================================
+   FLOATING WHATSAPP BUTTON (CLAYMORPHISM)
+   ========================================= */
+.floating-wa {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #25d366;
+    background-image: radial-gradient(ellipse at 35% 25%, rgba(255, 255, 255, 0.5) 0%, transparent 65%);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    z-index: 990;
+    box-shadow:
+        6px 10px 24px rgba(24, 150, 72, 0.4),
+        -3px -3px 10px rgba(255, 255, 255, 0.85),
+        inset 2px 2px 5px rgba(255, 255, 255, 0.65),
+        inset -2px -2px 5px rgba(18, 120, 58, 0.35);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, opacity 0.25s ease, visibility 0.25s ease;
+    outline: none;
+}
+
+.floating-wa__icon {
+    font-size: 2rem;
+    filter: drop-shadow(0 2px 4px rgba(18, 100, 48, 0.25));
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Saat hover sedikit naik dan berubah shadow */
+.floating-wa:hover {
+    transform: translateY(-5px) scale(1.06);
+    box-shadow:
+        8px 16px 32px rgba(24, 150, 72, 0.5),
+        -4px -4px 12px rgba(255, 255, 255, 0.95),
+        inset 2px 2px 6px rgba(255, 255, 255, 0.8),
+        inset -2px -2px 6px rgba(18, 120, 58, 0.4);
+}
+
+.floating-wa:hover .floating-wa__icon {
+    transform: scale(1.08) rotate(4deg);
+}
+
+.floating-wa:active {
+    transform: translateY(-1px) scale(0.96);
+    box-shadow:
+        3px 5px 14px rgba(24, 150, 72, 0.4),
+        inset 3px 3px 6px rgba(18, 120, 58, 0.35),
+        inset -2px -2px 4px rgba(255, 255, 255, 0.4);
+}
+
+.floating-wa:focus-visible {
+    outline: 2px solid var(--color-active);
+    outline-offset: 3px;
+}
+
+/* Sembunyikan floating WA saat modal project terbuka */
+body.modal-open .floating-wa {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN SYSTEM
+   Breakpoints: 1024px (Tablet) & 768px (Mobile)
+   ========================================= */
+
+/* --- TABLET (max-width: 1024px) --- */
+@media (max-width: 1024px) {
+    :root {
+        --sidebar-width: 140px;
+    }
+
+    /* Sidebar tetap vertikal di kiri (lebih compact) */
+    .sidebar {
+        top: 16px;
+        left: 16px;
+        bottom: 16px;
+        width: 140px;
+        padding: 24px 10px;
+        border-radius: 26px;
+    }
+
+    .sidebar__link {
+        padding: 10px 12px;
+        font-size: 0.88rem;
+        gap: 10px;
+    }
+
+    main {
+        margin-left: calc(140px + 16px);
+    }
+
+    /* Section Home */
+    .home__character-wrap {
+        height: 80vh;
+        max-height: 720px;
+    }
+
+    .home__name-badge {
+        bottom: 7vh;
+        padding: 14px 38px;
+    }
+
+    .home__name-title {
+        font-size: clamp(1.6rem, 3.2vw, 2.2rem);
+    }
+
+    /* Section About */
+    .about {
+        padding: 80px 40px;
+    }
+
+    .about__container {
+        gap: 36px;
+    }
+
+    .about__content {
+        max-width: 520px;
+    }
+
+    .about__heading {
+        font-size: clamp(1.8rem, 2.8vw, 2.3rem);
+    }
+
+    .about__intro {
+        font-size: 0.9rem;
+        margin-bottom: 24px;
+    }
+
+    .about__lanyard-side {
+        width: clamp(200px, 24vw, 280px);
+        margin-top: -30px;
+    }
+
+    /* Section Projects (Menampilkan sekitar 2 card di tablet) */
+    .projects {
+        padding: 80px 32px;
+    }
+
+    .projects__container {
+        gap: 36px;
+    }
+
+    .projects__title {
+        font-size: 1.65rem;
+    }
+
+    .projects__card {
+        flex: 0 0 calc((100% - 28px) / 2);
+        padding: 22px 20px 18px;
+    }
+
+    .projects__card-preview {
+        height: 160px;
+    }
+
+    .projects__card-icon {
+        font-size: 2.5rem;
+    }
+
+    /* Section Contact */
+    .contact {
+        padding: 80px 32px 100px;
+    }
+
+    .contact__title {
+        font-size: 1.65rem;
+    }
+
+    .contact__envelope-scene {
+        margin-top: 110px;
+        max-width: 500px;
+    }
+
+    .envelope {
+        height: 265px;
+    }
+
+    .envelope__back,
+    .envelope__pocket {
+        height: 235px;
+    }
+
+    .envelope__flap-top {
+        top: -85px;
+        height: 95px;
+    }
+
+    .envelope:hover .envelope__letter,
+    .envelope:focus-within .envelope__letter,
+    .envelope.is-open .envelope__letter {
+        transform: translateY(-150px);
+    }
+
+    .envelope__letter-title {
+        font-size: 1.35rem;
+    }
+
+    .envelope__letter-text {
+        font-size: 0.85rem;
+    }
+}
+
+/* Tablet sempit: lanyard dekoratif disembunyikan agar ruang tidak sesak */
+@media (max-width: 920px) and (min-width: 769px) {
+    .about__lanyard-side {
+        display: none;
+    }
+
+    .about__content {
+        max-width: 100%;
+    }
+}
+
+/* --- MOBILE (max-width: 768px) --- */
+@media (max-width: 768px) {
+    /* Ubah sidebar menjadi floating bottom navigation */
+    .sidebar {
+        position: fixed;
+        top: auto;
+        bottom: 16px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: min(calc(100% - 32px), 420px);
+        height: auto;
+        border-radius: 28px;
+        padding: 8px 12px;
+        z-index: 100;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        background: var(--color-sidebar);
+        background-image: radial-gradient(ellipse at 35% 20%, rgba(255, 255, 255, 0.55) 0%, transparent 65%);
+        box-shadow:
+            0 12px 30px rgba(135, 175, 165, 0.45),
+            inset 2px 2px 5px rgba(255, 255, 255, 0.8),
+            inset -2px -2px 5px rgba(130, 170, 160, 0.35);
+    }
+
+    .sidebar__nav {
+        width: 100%;
+    }
+
+    .sidebar__menu {
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        gap: 4px;
+        width: 100%;
+    }
+
+    .sidebar__item {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+    }
+
+    /* Menu tampil icon + label kecil */
+    .sidebar__link {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+        padding: 7px 8px;
+        border-radius: 18px;
+        width: 100%;
+        text-align: center;
+        color: var(--color-text-muted);
+    }
+
+    .sidebar__icon {
+        width: auto;
+        font-size: 1.15rem;
+        line-height: 1;
+    }
+
+    .sidebar__label {
+        display: block !important;
+        font-size: 0.68rem;
+        font-weight: 600;
+        line-height: 1;
+        letter-spacing: 0.3px;
+    }
+
+    .sidebar__link.active {
+        background: var(--color-active);
+        color: var(--color-text);
+        box-shadow:
+            3px 4px 10px rgba(135, 170, 160, 0.35),
+            -1px -1px 4px rgba(255, 255, 255, 0.95),
+            inset 1px 1px 2px #ffffff;
+        transform: none;
+    }
+
+    /* Tambahkan ruang bawah pada main agar content tidak tertutup navigation */
+    main {
+        margin-left: 0;
+        padding-top: 0;
+        padding-bottom: 90px;
+    }
+
+    /* Section Home */
+    .home {
+        height: 100vh;
+        min-height: 100vh;
+        justify-content: flex-end;
+        padding-bottom: 0;
+    }
+
+    /* Karakter tetap centered */
+    .home__character-wrap {
+        height: 68vh;
+        max-height: 580px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+    }
+
+    .home__character {
+        max-width: 88vw;
+        height: 100%;
+        object-fit: contain;
+        object-position: bottom center;
+    }
+
+    /* Hero title diperkecil & diposisikan aman di atas bottom nav */
+    .home__name-badge {
+        bottom: 105px;
+        padding: 10px 28px;
+        border-radius: 40px;
+    }
+
+    .home__name-title {
+        font-size: clamp(1.25rem, 5vw, 1.7rem);
+    }
+
+    /* Section About */
+    .about {
+        padding: 60px 20px 80px;
+    }
+
+    .about__container {
+        flex-direction: column;
+        align-items: center;
+        gap: 28px;
+    }
+
+    .about__content {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .about__heading {
+        font-size: clamp(1.6rem, 5vw, 2.1rem);
+    }
+
+    .about__intro {
+        font-size: 0.88rem;
+        margin-bottom: 24px;
+    }
+
+    .about__lanyard-side {
+        display: none; /* Sembunyikan lanyard dekoratif di mobile */
+    }
+
+    /* Section Projects */
+    .projects {
+        padding: 60px 16px 80px;
+    }
+
+    .projects__container {
+        gap: 24px;
+    }
+
+    .projects__title {
+        font-size: 1.45rem;
+    }
+
+    .projects__slider-wrapper {
+        gap: 6px;
+        width: 100%;
+    }
+
+    /* Project slider menampilkan sekitar 85% dari 1 card */
+    .projects__card {
+        flex: 0 0 85%;
+        scroll-snap-align: center;
+        padding: 22px 20px 18px;
+        border-radius: 22px;
+    }
+
+    .projects__card-preview {
+        height: 160px;
+    }
+
+    /* Tombol slider tetap mudah ditekan */
+    .projects__nav-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 0.9rem;
+        flex-shrink: 0;
+        z-index: 15;
+        pointer-events: auto;
+    }
+
+    .projects__track {
+        gap: 16px;
+        padding: 14px 4px;
+    }
+
+    /* Section Contact */
+    .contact {
+        padding: 60px 18px 110px; /* Ruang bawah ekstra agar tidak tertutup nav */
+    }
+
+    .contact__header {
+        max-width: 450px;
+    }
+
+    .contact__title {
+        font-size: 1.45rem;
+    }
+
+    /* Amplop Contact diperkecil */
+    .contact__envelope-scene {
+        margin-top: 105px;
+        max-width: 440px;
+        width: 100%;
+    }
+
+    .envelope {
+        height: 260px;
+        max-width: 100%;
+    }
+
+    .envelope__back,
+    .envelope__pocket {
+        height: 230px;
+        border-radius: 22px;
+    }
+
+    .envelope__flap-top {
+        top: -85px;
+        height: 95px;
+    }
+
+    .envelope__letter {
+        width: 92%;
+        left: 4%;
+        bottom: 16px;
+        transform: translateY(30px);
+    }
+
+    .envelope:hover .envelope__letter,
+    .envelope:focus-within .envelope__letter,
+    .envelope.is-open .envelope__letter {
+        transform: translateY(-145px);
+    }
+
+    .envelope__letter-card {
+        padding: 20px 18px 18px;
+        border-radius: 18px;
+        gap: 10px;
+    }
+
+    .envelope__letter-title {
+        font-size: 1.2rem;
+    }
+
+    .envelope__letter-text {
+        font-size: 0.82rem;
+    }
+
+    .envelope__letter-btn {
+        padding: 10px 22px;
+        font-size: 0.86rem;
+        width: 100%;
+    }
+
+    .contact__hint {
+        font-size: 0.8rem;
+        margin-top: 20px;
+    }
+
+    /* Floating WhatsApp berada di atas bottom nav */
+    .floating-wa {
+        bottom: calc(88px + env(safe-area-inset-bottom, 0px));
+        right: 20px;
+        width: 54px;
+        height: 54px;
+        z-index: 95;
+    }
+
+    .floating-wa__icon {
+        font-size: 1.8rem;
+    }
+}
+
+/* --- SMALL MOBILE (max-width: 480px) --- */
+@media (max-width: 480px) {
+    .sidebar {
+        width: calc(100% - 24px);
+        bottom: 12px;
+        padding: 6px 8px;
+        border-radius: 24px;
+    }
+
+    .sidebar__link {
+        padding: 6px 4px;
+        gap: 2px;
+    }
+
+    .sidebar__icon {
+        font-size: 1.05rem;
+    }
+
+    .sidebar__label {
+        font-size: 0.62rem;
+    }
+
+    .home__name-badge {
+        bottom: 95px;
+        padding: 9px 22px;
+    }
+
+    .home__name-title {
+        font-size: 1.25rem;
+    }
+
+    .home__character-wrap {
+        height: 62vh;
+        max-height: 520px;
+    }
+
+    .about {
+        padding: 50px 16px 70px;
+    }
+
+    .projects {
+        padding: 50px 12px 70px;
+    }
+
+    .projects__card {
+        flex: 0 0 88%;
+        padding: 18px 16px 14px;
+    }
+
+    .projects__card-preview {
+        height: 150px;
+    }
+
+    .projects__nav-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 0.82rem;
+    }
+
+    .contact {
+        padding: 50px 14px 100px;
+    }
+
+    .contact__envelope-scene {
+        margin-top: 90px;
+    }
+
+    .envelope {
+        height: 245px;
+    }
+
+    .envelope__back,
+    .envelope__pocket {
+        height: 215px;
+        border-radius: 18px;
+    }
+
+    .envelope__flap-top {
+        top: -75px;
+        height: 85px;
+    }
+
+    .envelope__letter {
+        transform: translateY(26px);
+    }
+
+    .envelope:hover .envelope__letter,
+    .envelope:focus-within .envelope__letter,
+    .envelope.is-open .envelope__letter {
+        transform: translateY(-132px);
+    }
+
+    .envelope__letter-card {
+        padding: 16px 14px 14px;
+        border-radius: 16px;
+    }
+
+    .envelope__letter-title {
+        font-size: 1.1rem;
+    }
+
+    .envelope__letter-text {
+        font-size: 0.78rem;
+    }
+
+    .envelope__seal {
+        width: 36px;
+        height: 36px;
+        font-size: 0.9rem;
+    }
+
+    .floating-wa {
+        bottom: calc(82px + env(safe-area-inset-bottom, 0px));
+        right: 16px;
+        width: 48px;
+        height: 48px;
+    }
+
+    .floating-wa__icon {
+        font-size: 1.55rem;
+    }
+
+    .project-modal {
+        padding: 14px;
+    }
+
+    .project-modal__content {
+        padding: 22px 16px 18px;
+        border-radius: 20px;
+    }
+
+    .project-modal__close {
+        top: 12px;
+        right: 12px;
+        width: 36px;
+        height: 36px;
+        font-size: 0.95rem;
+    }
+
+    .project-modal__preview-inner {
+        height: 190px;
+    }
+}
